@@ -15,6 +15,7 @@
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.1",
     "nodemon": "^3.1.9",
+    "prisma": "^6.6.0",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.8.3"
   },
