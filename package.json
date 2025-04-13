@@ -1,0 +1,38 @@
+{
+  "name": "speak-better",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "start": "turbo run start",
+    "lint": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend",
+    "lint:fix": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.0",
+    "@commitlint/config-conventional": "^19.8.0",
+    "@eslint/js": "^9.24.0",
+    "eslint": "^9.24.0",
+    "eslint-plugin-react": "^7.37.5",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.1",
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.0",
+    "typescript": "5.8.2",
+    "typescript-eslint": "^8.29.1"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "npm@10.8.2",
+  "workspaces": [
+    "apps/*"
+  ],
+  "lint-staged": {
+    "apps/**/*.{js,jsx,ts,tsx}": [
+      "npm run lint:fix"
+    ]
+  }
+}
