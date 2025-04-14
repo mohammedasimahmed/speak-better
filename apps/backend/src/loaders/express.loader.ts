@@ -1,6 +1,7 @@
 import express, { Application } from "express";
 import config from "../config/config";
 import cors from "cors";
+import helmet from "helmet";
 
 const expressLoader = (app: Application) => {
   app.use(express.json());
@@ -12,6 +13,8 @@ const expressLoader = (app: Application) => {
       credentials: true
     })
   );
+
+  app.use(helmet());
 
   if (config.ENVIRONMENT === "development") {
     import("morgan").then(morgan => {
