@@ -32,7 +32,7 @@
   ],
   "lint-staged": {
     "apps/**/*.{js,jsx,ts,tsx}": [
-      "npm run lint:fix"
+      "eslint --config lint/eslint/eslint.config.mjs --fix"
     ]
   }
 }
