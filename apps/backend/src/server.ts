@@ -1,8 +1,18 @@
 import express from "express";
+import config from "./config/config";
+import loader_initializer from "./loaders/index";
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+function startServer() {
+  const app = express();
 
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+  loader_initializer(app);
+
+  const {PORT} = config;
+
+  app.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+  });
+}
+
+startServer();
+
