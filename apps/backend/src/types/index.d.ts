@@ -8,3 +8,8 @@ export interface RegisterRequestBody {
     email: string;
     password: string;
 }
+
+export interface ImproveSpeechRequestBody {
+    speech :[string],
+    emotion: [string]
+}
