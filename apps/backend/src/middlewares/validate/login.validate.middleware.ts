@@ -1,11 +1,11 @@
 import { NextFunction, Response } from "express";
-import { LoginRequest } from "../types/requests/auth.request.type";
-import { loginSchema } from "../schemas/auth.schema";
-import { ApiError } from "../lib/api_error";
-import http_status_codes from "../config/http_status_codes";
+import { LoginRequest } from "../../types/requests/auth.request.type";
+import { loginSchema } from "../../schemas/auth.schema";
+import { ApiError } from "../../lib/api_error";
+import http_status_codes from "../../config/http_status_codes";
 
 
-const login_validate = (req: LoginRequest, _res:Response, next: NextFunction) => {
+const login_validate = (req: LoginRequest, _res: Response, next: NextFunction) => {
   const validate = loginSchema.safeParse(req.body);
 
   if (!validate.success) {
