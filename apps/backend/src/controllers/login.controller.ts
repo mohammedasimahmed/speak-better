@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import http_status_codes from "../config/http_status_codes";
 import loginUserService from "../services/login.service";
 
-export const loginUserController = async (req: Request, res: Response, next: NextFunction) => {
+const loginUserController = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const user = req.body;
 
@@ -18,3 +18,5 @@ export const loginUserController = async (req: Request, res: Response, next: Nex
     next(error);
   }
 };
+
+export default loginUserController;
