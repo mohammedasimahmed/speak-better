@@ -1,8 +1,8 @@
 import { Router } from "express";
 import registerUserController from "../controllers/register.controller";
-import register_validate from "../middlewares/validate/register.validate.middleware";
+import register_validate from "../middlewares/validate/register.middleware";
 import loginUserController from "../controllers/login.controller";
-import login_validate from "../middlewares/validate/login.validate.middleware";
+import login_validate from "../middlewares/validate/login.middleware";
 import refresh from "../controllers/refresh.controller";
 
 const router = Router();
