@@ -1,9 +1,9 @@
-import { prisma } from "../lib/prisma";
-import { ApiError } from "../lib/api_error";
-import http_status_codes from "../config/http_status_codes";
-import { RegisterRequestBody } from "../types";
-import { checkIfUsernameExists, checkIfEmailExists } from "../lib/user_verification";
-import { encryptPassword } from "../lib/password_encryption";
+import { prisma } from "../../lib/prisma";
+import { ApiError } from "../../lib/api_error";
+import http_status_codes from "../../config/http_status_codes";
+import { RegisterRequestBody } from "../../types";
+import { checkIfUsernameExists, checkIfEmailExists } from "../../lib/user_verification";
+import { encryptPassword } from "../../lib/password_encryption";
 
 const registerUserService = async (user: RegisterRequestBody) => {
   const { username, email, password } = user;

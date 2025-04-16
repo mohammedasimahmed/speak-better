@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import http_status_codes from "../config/http_status_codes";
-import handleRefreshToken from "../services/refresh.service";
+import handleRefreshToken from "../services/auth/refresh.service";
 import { ApiError } from "../lib/api_error";
 
 const refreshController = (req: Request, res: Response, next: NextFunction) => {

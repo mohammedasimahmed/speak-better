@@ -1,6 +1,6 @@
 import { Response, NextFunction } from "express";
 import http_status_codes from "../config/http_status_codes";
-import loginUserService from "../services/login.service";
+import loginUserService from "../services/auth/login.service";
 import config from "../config/config";
 import { LoginRequest } from "../types/requests/auth.request.type";
 

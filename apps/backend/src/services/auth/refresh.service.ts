@@ -1,6 +1,6 @@
-import { generateAccessToken } from "../lib/generate_tokens";
-import { User } from "../types";
-import verifyRefreshToken from "../lib/verify_refresh_token";
+import { generateAccessToken } from "../../lib/generate_tokens";
+import { User } from "../../types";
+import verifyRefreshToken from "../../lib/verify_refresh_token";
 
 const handleRefreshToken = (refreshToken: string) => {
 
