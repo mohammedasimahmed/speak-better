@@ -2,10 +2,12 @@ import express, { Application } from "express";
 import config from "../config/config";
 import cors from "cors";
 import helmet from "helmet";
+import cookie_parser from "cookie-parser";
 
 const expressLoader = (app: Application) => {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
+  app.use(cookie_parser());
 
   app.use(
     cors({
