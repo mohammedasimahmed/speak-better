@@ -1,6 +1,6 @@
 import { ApiError } from "../lib/api_error";
 import http_status_codes from "../config/http_status_codes";
-import { LoginRequestBody } from "../types";
+import { User } from "../types";
 import { passwordVerify } from "../lib/password_verify";
 import { checkIfUsernameExists } from "../lib/user_verification";
 import { generateAccessToken, generateRefreshToken } from "../lib/generate_tokens";
@@ -20,12 +20,11 @@ const validateUserCredentials = async (username: string, password: string) => {
   return user;
 };
 
-const loginUserService = async (user: LoginRequestBody) => {
-  const { username, password } = user;
-  const existingUser = await validateUserCredentials(username, password);
+const loginUserService = async (username: string, password: string) => {
+  const existingUser: User = await validateUserCredentials(username, password);
 
-  const accessToken = generateAccessToken(user);
-  const refreshToken = generateRefreshToken(user);
+  const accessToken = generateAccessToken(existingUser);
+  const refreshToken = generateRefreshToken(existingUser);
 
   return { accessToken, refreshToken, existingUser };
 };

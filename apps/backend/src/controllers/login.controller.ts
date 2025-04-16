@@ -6,9 +6,9 @@ import { LoginRequest } from "../types/requests/auth.request.type";
 
 const loginUserController = async (req: LoginRequest, res: Response, next: NextFunction) => {
   try {
-    const user = req.body;
+    const { username, password } = req.body;
 
-    const { accessToken, refreshToken, existingUser } = await loginUserService(user);
+    const { accessToken, refreshToken, existingUser } = await loginUserService(username, password);
 
     res.cookie("refresh", refreshToken, {
       httpOnly: true,
