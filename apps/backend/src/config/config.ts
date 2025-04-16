@@ -9,7 +9,8 @@ const config = {
   DATABASE_URL: process.env.DATABASE_URL!,
   ENVIRONMENT: process.env.ENVIRONMENT!,
   JWT_ACCESS_TOKEN_SECRET: process.env.JWT_ACCESS_TOKEN_SECRET!,
-  JWT_REFRESH_TOKEN_SECRET: process.env.JWT_REFRESH_TOKEN_SECRET!
+  JWT_REFRESH_TOKEN_SECRET: process.env.JWT_REFRESH_TOKEN_SECRET!,
+  API_KEY: process.env.API_KEY!,
 };
 
 export default config;
