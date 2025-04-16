@@ -1,9 +1,10 @@
-import { Request, Response, NextFunction } from "express";
+import { Response, NextFunction } from "express";
 import http_status_codes from "../config/http_status_codes";
 import loginUserService from "../services/login.service";
 import config from "../config/config";
+import { LoginRequest } from "../types/requests/auth.request.type";
 
-const loginUserController = async (req: Request, res: Response, next: NextFunction) => {
+const loginUserController = async (req: LoginRequest, res: Response, next: NextFunction) => {
   try {
     const user = req.body;
 
