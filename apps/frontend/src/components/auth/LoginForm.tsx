@@ -4,13 +4,29 @@ import InputField from "../InputField";
 import Button from "../Button";
 import InputLabel from "../InputLabel";
 import Link from "next/link";
+import loginUser from "@/services/loginUser";
 
 const LoginForm = () => {
   const usernameRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const user = {
+      username: usernameRef.current? usernameRef.current.value : "",
+      password: passwordRef.current? passwordRef.current.value: "",
+    };
+
+    try {
+      await loginUser(user);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        // console.log(error.message);
+      } else {
+        // console.error("An unknown error occurred");
+      }
+    }
+
   };
 
   return (

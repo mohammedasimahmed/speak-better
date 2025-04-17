@@ -1,26 +1,26 @@
-export type userCredentials = {
-    username: string;
-    password: string;
+import config from "@/config/config";
+
+type userCredentials = {
+  username: string;
+  password: string;
 };
 
-export const loginUser = async (credentials: userCredentials) => {
-  try {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(credentials),
-    });
+const loginUser = async (credentials: userCredentials) => {
+  const res = await fetch(config.AUTH_LOGIN_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(credentials),
+  });
 
-    if (!res.ok) {
-      throw new Error("Login failed");
-    }
-
-    const user = await res.json();
-    return user;
-  } catch (error) {
-    console.error("Login error:", error);
-    throw error;
+  if (!res.ok) {
+    const errorData = await res.json();
+    throw new Error(errorData.message || "Login failed");
   }
+
+  const user = await res.json();
+  return user;
 };
+
+export default loginUser;
