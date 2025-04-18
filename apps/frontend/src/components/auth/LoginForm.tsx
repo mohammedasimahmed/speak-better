@@ -7,11 +7,13 @@ import Link from "next/link";
 import loginUser from "@/services/loginUser";
 import { useAtom } from "jotai";
 import { userAtom } from "@/store";
+import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const usernameRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
   const [, setUser] = useAtom(userAtom);
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -24,6 +26,7 @@ const LoginForm = () => {
       const reponse = await loginUser(user);
       const { user: existingUser } = reponse;
       setUser(existingUser);
+      router.push("/");
     } catch (error: unknown) {
       if (error instanceof Error) {
         // console.log(error.message);
