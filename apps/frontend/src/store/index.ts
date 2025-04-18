@@ -6,4 +6,4 @@ export type userType = {
     email: string,
     password: string
 }
-export const userAtom = atom<userType>();
+export const userAtom = atom<userType| null>(null);

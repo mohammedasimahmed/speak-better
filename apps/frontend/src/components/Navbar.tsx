@@ -4,13 +4,20 @@ import React, { useState } from "react";
 import { useAtom } from "jotai";
 import { userAtom } from "@/store";
 import Button from "./Button";
+import logoutUser from "@/services/logoutUser";
 
 const Navbar = () => {
-  const [user] = useAtom(userAtom);
+  const [user, setUser] = useAtom(userAtom);
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
 
   const toggleNavbar = () => {
     setIsNavbarOpen(!isNavbarOpen);
+  };
+
+  const handleLogout = async () => {
+    await logoutUser();
+    toggleNavbar();
+    setUser(null);
   };
 
   return (
@@ -37,7 +44,7 @@ const Navbar = () => {
               <div className="mr-2 text-lg">
                 {user.username}
               </div>
-              <Button className="text-lg hover:underline hover:cursor-pointer">
+              <Button className="text-lg hover:underline hover:cursor-pointer" clickHandler={handleLogout}>
                 Logout
               </Button>
             </>
@@ -73,7 +80,7 @@ const Navbar = () => {
           {user ? (
             <>
               <div className="text-lg">{user.username}</div>
-              <Button className="text-lg hover:underline hover:cursor-pointer">
+              <Button className="text-lg hover:underline hover:cursor-pointer" clickHandler={handleLogout}>
                 Logout
               </Button>
             </>
