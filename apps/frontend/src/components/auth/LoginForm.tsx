@@ -5,20 +5,25 @@ import Button from "../Button";
 import InputLabel from "../InputLabel";
 import Link from "next/link";
 import loginUser from "@/services/loginUser";
+import { useAtom } from "jotai";
+import { userAtom } from "@/store";
 
 const LoginForm = () => {
   const usernameRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
+  const [, setUser] = useAtom(userAtom);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const user = {
-      username: usernameRef.current? usernameRef.current.value : "",
-      password: passwordRef.current? passwordRef.current.value: "",
+      username: usernameRef.current ? usernameRef.current.value : "",
+      password: passwordRef.current ? passwordRef.current.value : "",
     };
 
     try {
-      await loginUser(user);
+      const reponse = await loginUser(user);
+      const { user: existingUser } = reponse;
+      setUser(existingUser);
     } catch (error: unknown) {
       if (error instanceof Error) {
         // console.log(error.message);
