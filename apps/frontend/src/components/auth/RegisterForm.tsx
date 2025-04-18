@@ -5,11 +5,13 @@ import Button from "../Button";
 import InputLabel from "../InputLabel";
 import Link from "next/link";
 import registerUser from "@/services/registerUser";
+import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
   const usernameRef = React.useRef<HTMLInputElement>(null);
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
+  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,6 +23,7 @@ const RegisterForm = () => {
 
     try {
       await registerUser(user);
+      router.push("/login");
     } catch (error:unknown) {
       if(error instanceof Error)
       {
