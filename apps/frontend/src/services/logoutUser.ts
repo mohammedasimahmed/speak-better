@@ -14,6 +14,11 @@ const logoutUser = async () => {
     throw new Error(errorData.message || "Logout failed");
   }
 
+  if(sessionStorage.getItem("accessToken"))
+  {
+    sessionStorage.removeItem("accessToken");
+  }
+
   const result = await response.json();
   console.log(result.message);
 };
