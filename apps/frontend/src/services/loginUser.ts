@@ -6,7 +6,7 @@ type userCredentials = {
 };
 
 const loginUser = async (credentials: userCredentials) => {
-  const res = await fetch(config.AUTH_LOGIN_URL, {
+  const response = await fetch(config.AUTH_LOGIN_URL, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -15,13 +15,13 @@ const loginUser = async (credentials: userCredentials) => {
     credentials: "include"
   });
 
-  if (!res.ok) {
-    const errorData = await res.json();
+  if (!response.ok) {
+    const errorData = await response.json();
     throw new Error(errorData.message || "Login failed");
   }
 
-  const user = await res.json();
-  return user;
+  const result = await response.json();
+  return result;
 };
 
 export default loginUser;

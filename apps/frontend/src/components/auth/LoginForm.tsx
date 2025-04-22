@@ -23,9 +23,12 @@ const LoginForm = () => {
     };
 
     try {
-      const reponse = await loginUser(user);
-      const { user: existingUser } = reponse;
+      const result = await loginUser(user);
+      const { user: existingUser, accessToken } = result;
+
       setUser(existingUser);
+      sessionStorage.setItem("accessToken", accessToken);
+
       router.push("/");
     } catch (error: unknown) {
       if (error instanceof Error) {
