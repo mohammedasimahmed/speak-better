@@ -30,7 +30,9 @@ Output Format:
 - The second element of the array is the answer to question 2 (Clarity Check).
 - The third element of the array is the answer to question 3 (Irrelevant Content).
 - The elements in the array should be HTML content — it should not be an object. Do not forget this.
-- I will be directly displaying the HTML in the array elements in a website, so based on that, give good-looking HTML and in a format that can be directly put in an HTML file.
+- I will be directly displaying the HTML in the array elements in a website, so based on that, give good-looking HTML with good CSS and use tailwind CSS and keep it responsive and give in a format that can be directly put in an HTML file.
+- Give output in such a format that i can directly put the array into JSON.PARSE to convert the reponse you are giving into an array of strings.
+- Each element in the array should be a string with double quotes and not backticks
 - The HTML content should strictly follow this structure:
 
     For Emotional Correction (Question 1):
