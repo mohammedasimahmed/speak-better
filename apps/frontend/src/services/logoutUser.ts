@@ -18,9 +18,6 @@ const logoutUser = async () => {
   {
     sessionStorage.removeItem("accessToken");
   }
-
-  const result = await response.json();
-  console.log(result.message);
 };
 
 export default logoutUser;

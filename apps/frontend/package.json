@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "face-api.js": "^0.22.2",
     "jotai": "^2.12.3",
     "next": "15.3.0",
     "react": "^19.0.0",
