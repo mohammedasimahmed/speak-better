@@ -4,7 +4,6 @@ import handleRefreshToken from "../services/auth/refresh.service";
 import { ApiError } from "../lib/api_error";
 
 const refreshController = (req: Request, res: Response, next: NextFunction) => {
-
   if (!req.cookies) {
     const cookieMissing = new ApiError(
       "Cookie is missing",
@@ -30,8 +29,8 @@ const refreshController = (req: Request, res: Response, next: NextFunction) => {
   const refreshToken = cookies.refresh;
 
   try {
-    const accessToken = handleRefreshToken(refreshToken);
-    res.status(http_status_codes.OK).json({ accessToken });
+    const { accessToken, username, email } = handleRefreshToken(refreshToken);
+    res.status(http_status_codes.OK).json({ accessToken, username, email });
   } catch (error) {
     next(error);
   }
