@@ -26,7 +26,12 @@ const loginUserService = async (username: string, password: string) => {
   const accessToken = generateAccessToken(existingUser);
   const refreshToken = generateRefreshToken(existingUser);
 
-  return { accessToken, refreshToken, existingUser };
+  const user = {
+    username: existingUser.username,
+    email: existingUser.email
+  };
+
+  return { accessToken, refreshToken, user };
 };
 
 export default loginUserService;

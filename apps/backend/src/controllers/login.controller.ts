@@ -8,7 +8,7 @@ const loginUserController = async (req: LoginRequest, res: Response, next: NextF
   try {
     const { username, password } = req.body;
 
-    const { accessToken, refreshToken, existingUser } = await loginUserService(username, password);
+    const { accessToken, refreshToken, user } = await loginUserService(username, password);
 
     res.cookie("refresh", refreshToken, {
       httpOnly: true,
@@ -20,7 +20,7 @@ const loginUserController = async (req: LoginRequest, res: Response, next: NextF
     res.status(http_status_codes.OK).json({
       message: "Login successful",
       accessToken,
-      user: existingUser
+      user
     });
   } catch (error) {
     next(error);
