@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import InputField from "../InputField";
 import Button from "../Button";
 import InputLabel from "../InputLabel";
@@ -10,8 +10,8 @@ import { userAtom } from "@/store";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
-  const usernameRef = React.useRef<HTMLInputElement>(null);
-  const passwordRef = React.useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const [, setUser] = useAtom(userAtom);
   const router = useRouter();
 
@@ -28,6 +28,7 @@ const LoginForm = () => {
 
       setUser(existingUser);
       sessionStorage.setItem("accessToken", accessToken);
+      sessionStorage.setItem("username", existingUser.username);
 
       router.push("/");
     } catch (error: unknown) {

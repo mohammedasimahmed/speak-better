@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useRef } from "react";
 import InputField from "../InputField";
 import Button from "../Button";
 import InputLabel from "../InputLabel";
@@ -8,9 +8,9 @@ import registerUser from "@/services/registerUser";
 import { useRouter } from "next/navigation";
 
 const RegisterForm = () => {
-  const usernameRef = React.useRef<HTMLInputElement>(null);
-  const emailRef = React.useRef<HTMLInputElement>(null);
-  const passwordRef = React.useRef<HTMLInputElement>(null);
+  const usernameRef = useRef<HTMLInputElement>(null);
+  const emailRef = useRef<HTMLInputElement>(null);
+  const passwordRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
