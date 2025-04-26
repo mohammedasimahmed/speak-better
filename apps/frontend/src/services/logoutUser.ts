@@ -23,6 +23,11 @@ const logoutUser = async () => {
   {
     sessionStorage.removeItem("username");
   }
+
+  if(sessionStorage.getItem("email"))
+  {
+    sessionStorage.removeItem("username");
+  }
 };
 
 export default logoutUser;

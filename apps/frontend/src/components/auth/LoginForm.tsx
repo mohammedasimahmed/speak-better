@@ -5,14 +5,14 @@ import Button from "../Button";
 import InputLabel from "../InputLabel";
 import Link from "next/link";
 import loginUser from "@/services/loginUser";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 import { userAtom } from "@/store";
 import { useRouter } from "next/navigation";
 
 const LoginForm = () => {
   const usernameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
-  const [, setUser] = useAtom(userAtom);
+  const setUser = useSetAtom(userAtom);
   const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -26,9 +26,12 @@ const LoginForm = () => {
       const result = await loginUser(user);
       const { user: existingUser, accessToken } = result;
 
-      setUser(existingUser);
+      const { username, email } = existingUser;
+      setUser({ username, email });
+
       sessionStorage.setItem("accessToken", accessToken);
-      sessionStorage.setItem("username", existingUser.username);
+      sessionStorage.setItem("username", username);
+      sessionStorage.setItem("email", email);
 
       router.push("/");
     } catch (error: unknown) {
