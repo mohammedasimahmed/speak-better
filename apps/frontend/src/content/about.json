@@ -1,0 +1,7 @@
+{
+    "aboutTitle": "About SpeakBetter",
+    "aboutDescription": "SpeakBetter, developed by Mohammed Asim Ahmed, is a platform designed to help people enhance their speech delivery through smart analysis. Users record themselves speaking in front of a camera, capturing both their speech and emotions during the delivery. This data is sent to the backend, where it is processed by a large language model (LLM) for detailed evaluation. The system analyzes the speech based on three key aspects: emotional correction, clarity of speech, and irrelevant content detection. Emotional correction finds sentences where the speaker’s emotions could be improved to make the speech more engaging. Clarity check highlights areas where the speech could be clearer and provides suggestions for improvement. Irrelevant content detection points out sections that are off-topic or unnecessary. Based on this analysis, SpeakBetter generates suggestions that help users to improve their speeches.",
+    "madeByTitle": "Made By",
+    "creatorName": "Mohammed Asim Ahmed",
+    "creatorImage": "/images/asim.jpg"
+}
