@@ -46,7 +46,7 @@ const AutoLogin = () => {
   };
   useEffect(() => {
     checkAuth();
-  });
+  }, []);
   return null;
 };
 
