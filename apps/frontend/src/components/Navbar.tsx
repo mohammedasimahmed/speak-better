@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAtom } from "jotai";
 import { userAtom } from "@/store";
 import Button from "./Button";
@@ -9,6 +9,7 @@ import logoutUser from "@/services/logoutUser";
 const Navbar = () => {
   const [user, setUser] = useAtom(userAtom);
   const [isNavbarOpen, setIsNavbarOpen] = useState(false);
+  const navRef = useRef<HTMLElement | null>(null);
 
   const toggleNavbar = () => {
     setIsNavbarOpen(!isNavbarOpen);
@@ -20,8 +21,26 @@ const Navbar = () => {
     setUser(null);
   };
 
+  const handleScroll = () => {
+    if (navRef.current) {
+      if (window.scrollY > 10) {
+        navRef.current.style.backdropFilter = "blur(5px)";
+      }
+      else {
+        navRef.current.style.backdropFilter = "none";
+      }
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <nav className="w-full fixed top-0 z-20 px-6 py-3 text-white">
+    <nav ref={navRef} className="w-full fixed top-0 z-20 px-6 py-3 text-white">
       <div className="w-full flex items-center justify-between">
         <Link href="/">
           <div className="text-2xl lg:text-3xl font-semibold">SpeakBetter</div>
