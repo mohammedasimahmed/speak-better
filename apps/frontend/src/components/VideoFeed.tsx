@@ -6,6 +6,9 @@ import improveSpeech from "@/services/improveSpeech";
 import { useSetAtom } from "jotai";
 import { suggestionAtom } from "@/store";
 import loadFaceApiModels from "@/services/loadFaceApiModels";
+import getNewToken from "@/services/getNewToken";
+import { useRouter } from "next/navigation";
+import logoutUser from "@/services/logoutUser";
 
 const VideoFeed = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -20,6 +23,8 @@ const VideoFeed = () => {
 
   const currentEmotionRef = useRef<string>("");
   const lastSpeechTimestamp = useRef<number>(Date.now());
+
+  const router = useRouter();
 
   const initializeVideoStream = async () => {
     const stream = await navigator.mediaDevices.getUserMedia({
@@ -102,11 +107,25 @@ const VideoFeed = () => {
   };
 
   const processSpeechImprovement = async () => {
-    if (wordEmotionPairs.length > 0 && !isRecordingRef.current) {
+    if (wordEmotionPairs.length === 0 || isRecordingRef.current) return;
+
+    try {
       const { improvements } = await improveSpeech(wordEmotionPairs);
 
       if (improvements) {
         setSuggestion(JSON.parse(improvements));
+      }
+    } catch {
+      const response = await getNewToken();
+
+      if (response.ok) {
+        const { accessToken } = await response.json();
+        sessionStorage.setItem("accessToken", accessToken);
+
+        await processSpeechImprovement();
+      } else {
+        await logoutUser();
+        router.push("/login");
       }
     }
   };
