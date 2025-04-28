@@ -14,20 +14,7 @@ const logoutUser = async () => {
     throw new Error(errorData.message || "Logout failed");
   }
 
-  if(sessionStorage.getItem("accessToken"))
-  {
-    sessionStorage.removeItem("accessToken");
-  }
-
-  if(sessionStorage.getItem("username"))
-  {
-    sessionStorage.removeItem("username");
-  }
-
-  if(sessionStorage.getItem("email"))
-  {
-    sessionStorage.removeItem("username");
-  }
+  sessionStorage.clear();
 };
 
 export default logoutUser;

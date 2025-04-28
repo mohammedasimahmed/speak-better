@@ -17,17 +17,7 @@ const AutoLogin = () => {
       return;
     }
 
-    if (username) {
-      sessionStorage.removeItem("username");
-    }
-
-    if (email) {
-      sessionStorage.removeItem("email");
-    }
-
-    if (accessToken) {
-      sessionStorage.removeItem("accessToken");
-    }
+    sessionStorage.clear();
 
     try {
       const response = await getNewToken();
