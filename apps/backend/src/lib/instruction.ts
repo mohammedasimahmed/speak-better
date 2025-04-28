@@ -41,6 +41,7 @@ Output Format:
 
     For Clarity Check (Question 2):
         - Use headings for each sentence.
+        - Highlight areas where the speech could be more clear.
         - Provide clarity feedback and suggestions for improvement in bullet points.
 
     For Irrelevant Content (Question 3):
