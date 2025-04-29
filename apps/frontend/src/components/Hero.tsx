@@ -20,7 +20,7 @@ export function Hero() {
           duration: 0.5,
           ease: [0.4, 0.0, 0.2, 1],
         }}
-        className="px-4 text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
+        className="px-4 text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
       >
         <div className="flex flex-col justify-center items-center gap-4">
           <div className="text-6xl sm:text-7xl md:text-8xl font-light">
