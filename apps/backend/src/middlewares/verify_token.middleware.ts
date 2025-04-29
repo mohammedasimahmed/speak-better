@@ -42,12 +42,14 @@ const verifyToken = (req: Request, _res: Response, next: NextFunction) => {
     next();
   } catch (error) {
     if (error instanceof TokenExpiredError) {
-      next(new ApiError("Access token has expired", http_status_codes.UNAUTHORIZED));
+      const tokenExpiredError = new ApiError("Access token has expired", http_status_codes.UNAUTHORIZED);
+      next(tokenExpiredError);
       return;
     }
 
     if (error instanceof JsonWebTokenError) {
-      next(new ApiError("Invalid access token", http_status_codes.UNAUTHORIZED));
+      const invalidTokenError = new ApiError("Invalid access token", http_status_codes.UNAUTHORIZED);
+      next(invalidTokenError);
       return;
     }
 
