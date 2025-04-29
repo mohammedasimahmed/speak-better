@@ -20,7 +20,9 @@
     "zod": "^3.24.3"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
+    "@types/morgan": "^1.9.9",
     "@types/node": "^22.15.3",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.10",
