@@ -1,4 +1,5 @@
 "use client";
+import IsAuth from "@/components/auth/IsAuth";
 import Suggestions from "@/components/Suggestions";
 import VideoFeed from "@/components/VideoFeed";
 import { suggestionAtom } from "@/store";
@@ -8,7 +9,7 @@ import React from "react";
 const page = () => {
   const suggestion = useAtomValue(suggestionAtom);
   return (
-    <>
+    <IsAuth>
       {
         suggestion ? (
           <Suggestions />
@@ -16,7 +17,7 @@ const page = () => {
           <VideoFeed />
         )
       }
-    </>
+    </IsAuth>
   );
 };
 
