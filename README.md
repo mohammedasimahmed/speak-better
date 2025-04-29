@@ -137,6 +137,16 @@ npx prisma generate --no-engine
 
 ---
 
+Sure! Here's the updated section to include that **SpeakBetter works only in Chrome browser**:
+
+---
+
+## ⚠️ Browser Compatibility
+
+> **Note:** SpeakBetter currently supports **only the Chrome browser** 
+
+---
+
 ## 📌 Root-level Scripts
 
 ```bash
