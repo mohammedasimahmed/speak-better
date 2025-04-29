@@ -48,5 +48,16 @@ export default defineConfig([
       globals: globals.node,
     },
     rules: commonRules,
-  }
+  },
+
+  // Backend cache config
+  {
+    files: ["apps/backend-cache/**/*.{js,ts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: {
+      globals: globals.node,
+    },
+    rules: commonRules,
+  },
 ]);
