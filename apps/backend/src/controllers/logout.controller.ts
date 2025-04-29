@@ -28,7 +28,7 @@ const logoutController = (req: Request, res: Response, next: NextFunction) => {
   res.clearCookie("refresh", {
     httpOnly: true,
     secure: config.ENVIRONMENT === "production",
-    sameSite: "strict",
+    sameSite: "none",
     maxAge: 0,
   });
 

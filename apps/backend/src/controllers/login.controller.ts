@@ -13,7 +13,7 @@ const loginUserController = async (req: LoginRequest, res: Response, next: NextF
     res.cookie("refresh", refreshToken, {
       httpOnly: true,
       secure: config.ENVIRONMENT === "production",
-      sameSite: "strict",
+      sameSite: "none",
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
