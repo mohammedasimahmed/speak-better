@@ -6,7 +6,7 @@ const config = {
   AUTH_REGISTER_URL: process.env.NEXT_PUBLIC_AUTH_REGISTER_URL || "http://localhost:5000/api/auth/register",
   AUTH_LOGOUT_URL: process.env.NEXT_PUBLIC_AUTH_LOGOUT_URL || "http://localhost:5000/api/auth/logout",
   AUTH_REFRESH_URL: process.env.NEXT_PUBLIC_AUTH_REFRESH_URL || "http://localhost:5000/api/auth/refresh",
-  SPEECH_URL: process.env.NEXT_PUBLIC_SPEECH || "http://localhost:5000/api/speech"
+  SPEECH_URL: process.env.NEXT_PUBLIC_SPEECH_URL || "http://localhost:5000/api/speech"
 };
 
 export default config;
