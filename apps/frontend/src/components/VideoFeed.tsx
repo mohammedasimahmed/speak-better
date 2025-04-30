@@ -84,7 +84,7 @@ const VideoFeed = () => {
       }
     }, 100);
 
-    // Add "[No Speech]" entry if no speech for over 1500ms
+    // Add "[No Word]" entry if no speech for over 1500ms
     noSpeechIntervalRef.current = setInterval(() => {
       const now = Date.now();
       if (now - lastSpeechTimestamp.current > 1500) {
