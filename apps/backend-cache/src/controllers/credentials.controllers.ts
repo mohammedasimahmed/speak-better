@@ -6,7 +6,7 @@ import {
   addEmail,
   removeUsername,
   removeEmail
-} from "../services/bloom_filter.services";
+} from "../services/credentials.services";
 import http_status_codes from "../config/http_status_codes";
 
 export const checkCredentialsController = (req: Request, res: Response) => {

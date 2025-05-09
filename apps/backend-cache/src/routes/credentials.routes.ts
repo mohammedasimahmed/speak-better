@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { addCredentialsController, checkCredentialsController, removeCredentialsController } from "../controllers/bloom.controllers";
+import { addCredentialsController, checkCredentialsController, removeCredentialsController } from "../controllers/credentials.controllers";
 
 const router = Router();
 
