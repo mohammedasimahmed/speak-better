@@ -22,8 +22,17 @@ const registerUserService = async (user: RegisterRequestBody) => {
     if (response.ok) {
       const { isUsernameExists, isEmailExists } = await response.json();
 
-      usernameExists = isUsernameExists;
-      emailExists = isEmailExists;
+      if (isUsernameExists) {
+        usernameExists = !!(await checkIfUsernameExists(username));
+      } else {
+        usernameExists = false;
+      }
+
+      if (isEmailExists) {
+        emailExists = !!(await checkIfEmailExists(email));
+      } else {
+        emailExists = false;
+      }
 
     } else {
       usernameExists = !!(await checkIfUsernameExists(username));
@@ -35,11 +44,11 @@ const registerUserService = async (user: RegisterRequestBody) => {
   }
 
   if (usernameExists) {
-    throw new ApiError("Please Choose Another Username", http_status_codes.CONFLICT);
+    throw new ApiError("Username already taken", http_status_codes.CONFLICT);
   }
 
   if (emailExists) {
-    throw new ApiError("Please Choose Another Email", http_status_codes.CONFLICT);
+    throw new ApiError("Email already taken", http_status_codes.CONFLICT);
   }
 
   try {
