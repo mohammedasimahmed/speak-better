@@ -1,9 +1,0 @@
-# dependencies
-node_modules
-
-#builds
-dist
-.turbo
-
-#env
-.env

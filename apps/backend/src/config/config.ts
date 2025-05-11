@@ -14,7 +14,12 @@ const config = {
   BACKEND_CACHE_URL: process.env.BACKEND_CACHE_URL || "http://localhost:8000",
   BACKEND_CACHE_CHECK_CREDENTIALS_URL: process.env.BACKEND_CACHE_CHECK_CREDENTIALS_URL || "http://localhost:8000/api/check-credentials",
   BACKEND_CACHE_ADD_CREDENTIALS_URL: process.env.BACKEND_CACHE_ADD_CREDENTIALS_URL || "http://localhost:8000/api/add-credentials",
-  BACKEND_CACHE_REMOVE_CREDENTIALS_URL: process.env.BACKEND_CACHE_REMOVE_CREDENTIALS_URL || "http://localhost:8000/api/remove-credentials"
+  BACKEND_CACHE_REMOVE_CREDENTIALS_URL: process.env.BACKEND_CACHE_REMOVE_CREDENTIALS_URL || "http://localhost:8000/api/remove-credentials",
+  USERNAME_FILTER_SIZE: process.env.USERNAME_FILTER_SIZE ? parseInt(process.env.USERNAME_FILTER_SIZE) : 1437759,
+  USERNAME_FILTER_HASH_FUNCTION_COUNT: process.env.USERNAME_FILTER_HASH_FUNCTION_COUNT ? parseInt(process.env.USERNAME_FILTER_HASH_FUNCTION_COUNT) : 10,
+  EMAIL_FILTER_SIZE: process.env.EMAIL_FILTER_SIZE ? parseInt(process.env.EMAIL_FILTER_SIZE) : 1437759,
+  EMAIL_FILTER_HASH_FUNCTION_COUNT: process.env.EMAIL_FILTER_HASH_FUNCTION_COUNT ? parseInt(process.env.EMAIL_FILTER_HASH_FUNCTION_COUNT) : 10,
+  CACHE_ELEMENT_TTL: process.env.CACHE_ELEMENT_TTL ? parseInt(process.env.CACHE_ELEMENT_TTL) : 86400
 };
 
 export default config;

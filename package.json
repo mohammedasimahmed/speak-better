@@ -5,8 +5,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "start": "turbo run start",
-    "lint": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend apps/backend-cache",
-    "lint:fix": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend apps/backend-cache --fix",
+    "lint": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend",
+    "lint:fix": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend --fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install"
   },

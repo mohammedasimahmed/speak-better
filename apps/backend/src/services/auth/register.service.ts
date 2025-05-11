@@ -2,66 +2,41 @@ import { prisma } from "../../lib/prisma";
 import { ApiError } from "../../lib/api_error";
 import http_status_codes from "../../config/http_status_codes";
 import { RegisterRequestBody } from "../../types";
-import { checkIfUsernameExists, checkIfEmailExists } from "../../lib/user_verification";
+import { isUsernameTaken, isEmailTaken } from "../../lib/user_checks";
 import { encryptPassword } from "../../lib/password_encryption";
-import config from "../../config/config";
+import { addToEmailFilter, addToUsernameFilter, checkEmailFilter, checkUsernameFilter } from "../../lib/query_bloom_filters";
 
 const registerUserService = async (user: RegisterRequestBody) => {
   const { username, email, password } = user;
 
-  let usernameExists = false;
-  let emailExists = false;
+  let isUsernameExists = false;
 
-  try {
-    const response = await fetch(config.BACKEND_CACHE_CHECK_CREDENTIALS_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email }),
-    });
+  isUsernameExists = checkUsernameFilter(username);
 
-    if (response.ok) {
-      const { isUsernameExists, isEmailExists } = await response.json();
-
-      if (isUsernameExists) {
-        usernameExists = !!(await checkIfUsernameExists(username));
-      } else {
-        usernameExists = false;
-      }
-
-      if (isEmailExists) {
-        emailExists = !!(await checkIfEmailExists(email));
-      } else {
-        emailExists = false;
-      }
-
-    } else {
-      usernameExists = !!(await checkIfUsernameExists(username));
-      emailExists = !!(await checkIfEmailExists(email));
-    }
-  } catch {
-    usernameExists = !!(await checkIfUsernameExists(username));
-    emailExists = !!(await checkIfEmailExists(email));
+  if (isUsernameExists) {
+    isUsernameExists = !!(await isUsernameTaken(username));
   }
 
-  if (usernameExists) {
+  if (isUsernameExists) {
     throw new ApiError("Username already taken", http_status_codes.CONFLICT);
+  }
+
+  let emailExists = false;
+
+  emailExists = checkEmailFilter(email);
+
+  if (emailExists) {
+    emailExists = !!(await isEmailTaken(email));
   }
 
   if (emailExists) {
     throw new ApiError("Email already taken", http_status_codes.CONFLICT);
   }
 
-  try {
-    await fetch(config.BACKEND_CACHE_ADD_CREDENTIALS_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, email }),
-    });
-  } catch {
-    throw new ApiError("Unexpected error during cache update", http_status_codes.INTERNAL_SERVER_ERROR);
-  }
-
   const hashedPassword = await encryptPassword(password);
+
+  addToUsernameFilter(username);
+  addToEmailFilter(email);
 
   const newUser = await prisma.user.create({
     data: { username, email, password: hashedPassword },
