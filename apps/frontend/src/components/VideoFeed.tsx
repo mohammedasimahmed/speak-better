@@ -9,6 +9,7 @@ import loadFaceApiModels from "@/services/loadFaceApiModels";
 import getNewToken from "@/services/getNewToken";
 import { useRouter } from "next/navigation";
 import logoutUser from "@/services/logoutUser";
+import { ApiError } from "@/lib/api_error";
 
 const VideoFeed = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -113,9 +114,14 @@ const VideoFeed = () => {
       const { improvements } = await improveSpeech(wordEmotionPairs);
 
       if (improvements) {
-        setSuggestion(JSON.parse(improvements));
+        const result = JSON.parse(improvements.replace(/^```|```$/g, ""));
+        setSuggestion(result);
       }
-    } catch {
+    } catch (error) {
+      if (!(error instanceof ApiError) || (error instanceof ApiError && error.statusCode !== 401)) {
+        throw error;
+      }
+
       const response = await getNewToken();
 
       if (response.ok) {

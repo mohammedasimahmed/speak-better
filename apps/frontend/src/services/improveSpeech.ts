@@ -1,4 +1,5 @@
 import config from "@/config/config";
+import { ApiError } from "@/lib/api_error";
 
 type WordEmotionPair = {
     word: string,
@@ -30,7 +31,7 @@ const improveSpeech = async (wordEmotionPairs: WordEmotionPair[]) => {
 
   if (!res.ok) {
     const errorData = await res.json();
-    throw new Error(errorData.message || "An error occurred");
+    throw new ApiError(errorData.message || "An error occurred", res.status);
   }
 
   const resp = await res.json();
