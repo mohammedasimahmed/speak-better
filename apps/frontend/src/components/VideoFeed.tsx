@@ -10,6 +10,7 @@ import getNewToken from "@/services/getNewToken";
 import { useRouter } from "next/navigation";
 import logoutUser from "@/services/logoutUser";
 import { ApiError } from "@/lib/api_error";
+import Button from "./Button";
 
 const VideoFeed = () => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -169,12 +170,12 @@ const VideoFeed = () => {
         <div className="w-full h-full sm:w-4/5 md:w-2/3 lg:w-3/4 xl:w-1/2">
           <video ref={videoRef} className="w-full h-full object-cover rounded-lg rotate-y-180" autoPlay muted />
         </div>
-        <button
-          onClick={isRecording ? stopRecording : startRecording}
+        <Button
+          clickHandler={isRecording ? stopRecording : startRecording}
           className={`mt-4 p-2 rounded ${isRecording ? "bg-red-600" : "bg-green-600"} text-white`}
         >
           {isRecording ? "Stop" : "Start"}
-        </button>
+        </Button>
       </div>
     </div>
   );

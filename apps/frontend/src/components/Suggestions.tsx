@@ -4,7 +4,7 @@ import { suggestionAtom } from "@/store";
 import Button from "./Button";
 
 const Suggestions = () => {
-  const [suggestions] = useAtom(suggestionAtom);
+  const [suggestions, setSuggestions] = useAtom(suggestionAtom);
   const [selectedSuggestionIndex, setSelectedSuggestionIndex] = useState(0);
   const suggestionTextRef = useRef<HTMLDivElement | null>(null);
 
@@ -16,7 +16,7 @@ const Suggestions = () => {
   }, [selectedSuggestionIndex, suggestions]);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center">
+    <div className="w-screen h-screen flex flex-col justify-center items-center">
       <div className="w-4/5 h-3/4 flex flex-col items-center bg-white rounded-3xl shadow-lg p-6">
         <div className="flex flex-wrap gap-2 mb-4">
           {suggestions?.map((suggestion, index) => (
@@ -34,6 +34,9 @@ const Suggestions = () => {
           <div ref={suggestionTextRef} className="text-lg h-full text-gray-800l" />
         </div>
       </div>
+      <Button className="mt-4 p-2 rounded bg-green-600 text-white" clickHandler={() => setSuggestions(null)}>
+        Go Back
+      </Button>
     </div>
   );
 };
