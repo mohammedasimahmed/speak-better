@@ -12,14 +12,26 @@ const registerUserService = async (user: RegisterRequestBody) => {
 
   if(checkUsernameFilter(username))
   {
-    if(usernameCache.has(username) || await isUsernameTaken(username))
+    if(usernameCache.has(username))
     {
+      throw new ApiError("Username already taken", http_status_codes.CONFLICT);
+    }
+
+    if(await isUsernameTaken(username))
+    {
+      usernameCache.add(username);
       throw new ApiError("Username already taken", http_status_codes.CONFLICT);
     }
   }
 
-  if (checkEmailFilter(email)) {
-    if (emailCache.has(email) || await isEmailTaken(email)) {
+  if (checkEmailFilter(email))
+  {
+    if (emailCache.has(email)) {
+      throw new ApiError("Email already taken", http_status_codes.CONFLICT);
+    }
+
+    if (await isEmailTaken(email)) {
+      emailCache.add(email);
       throw new ApiError("Email already taken", http_status_codes.CONFLICT);
     }
   }
