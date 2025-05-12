@@ -25,7 +25,10 @@ I have a speech represented as an array of words or phrases, and I also have an 
 Output Format:
 
 - Your response should be structured as an array of answers — don't forget this. It should be an array only, nothing else.
-- Just give the array as your response — no text before or after the array.
+- Your response should be an array beginning with [ and ending with ].
+- Your response should not be json.
+- Your response should be a string that can be parsed into an array do not forget this so dont give json in response give text.
+- Just give the array as your response — nothing before or after the array.
 - The first element of the array is the answer to question 1 (Emotional Correction).
 - The second element of the array is the answer to question 2 (Clarity Check).
 - The third element of the array is the answer to question 3 (Irrelevant Content).
