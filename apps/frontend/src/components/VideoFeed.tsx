@@ -4,7 +4,7 @@ import detectExpression from "@/services/detectExpression";
 import createSpeechRecognizer from "@/services/createSpeechRecognizer";
 import improveSpeech from "@/services/improveSpeech";
 import { useSetAtom } from "jotai";
-import { suggestionAtom } from "@/store";
+import { isSuggestionLoadingAtom, suggestionAtom } from "@/store";
 import loadFaceApiModels from "@/services/loadFaceApiModels";
 import getNewToken from "@/services/getNewToken";
 import { useRouter } from "next/navigation";
@@ -21,6 +21,8 @@ const VideoFeed = () => {
   const recognitionRef = useRef<SpeechRecognition | null>(null);
   const isRecordingRef = useRef<boolean>(false);
   const setSuggestion = useSetAtom(suggestionAtom);
+
+  const setIsSuggestionLoading = useSetAtom(isSuggestionLoadingAtom);
 
   const currentEmotionRef = useRef<string>("");
   const lastSpeechTimestamp = useRef<number>(Date.now());
@@ -110,6 +112,8 @@ const VideoFeed = () => {
   const processSpeechImprovement = async () => {
     if (wordEmotionPairs.length === 0 || isRecordingRef.current) return;
 
+    setIsSuggestionLoading(true);
+
     try {
       const { improvements } = await improveSpeech(wordEmotionPairs);
 
@@ -119,6 +123,7 @@ const VideoFeed = () => {
       }
     } catch (error) {
       if (!(error instanceof ApiError) || (error instanceof ApiError && error.statusCode !== 401)) {
+        setIsSuggestionLoading(false);
         throw error;
       }
 
@@ -134,9 +139,12 @@ const VideoFeed = () => {
         router.push("/login");
       }
     }
+
+    setIsSuggestionLoading(false);
   };
 
   useEffect(() => {
+    setIsSuggestionLoading(false);
     const initializeApp = async () => {
       await loadFaceApiModels();
       initializeVideoStream();
