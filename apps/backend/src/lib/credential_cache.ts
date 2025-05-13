@@ -1,6 +1,6 @@
 import config from "../config/config";
 
-export default class UsernameCache {
+export default class CredentialCache {
   private store: Map<string, number>;
   private elementTTL: number = config.CACHE_ELEMENT_TTL;
 
