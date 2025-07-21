@@ -9,7 +9,7 @@ import loadFaceApiModels from "@/services/loadFaceApiModels";
 import getNewToken from "@/services/getNewToken";
 import { useRouter } from "next/navigation";
 import logoutUser from "@/services/logoutUser";
-import { ApiError } from "@/lib/api_error";
+import { ApiError } from "@/lib/api-error";
 import Button from "./Button";
 
 const VideoFeed = () => {

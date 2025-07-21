@@ -1,4 +1,4 @@
-import customHasher from "./custom_hasher";
+import customHasher from "./custom-hasher";
 
 const generateHashes = (key: string, numHashes: number) : number[] => {
   const hashes = [];

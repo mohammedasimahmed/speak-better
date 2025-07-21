@@ -1,9 +1,9 @@
 import config from "@/config/config";
-import { ApiError } from "@/lib/api_error";
+import { ApiError } from "@/lib/api-error";
 
 type WordEmotionPair = {
-    word: string,
-    emotion: string
+  word: string,
+  emotion: string
 }
 
 const improveSpeech = async (wordEmotionPairs: WordEmotionPair[]) => {

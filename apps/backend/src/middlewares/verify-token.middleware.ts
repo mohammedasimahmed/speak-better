@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { ApiError } from "../lib/api_error";
-import http_status_codes from "../config/http_status_codes";
+import { ApiError } from "../lib/api-error";
+import httpStatusCodes from "../config/http-status-codes";
 import jwt, { JwtPayload, JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
 import config from "../config/config";
 
@@ -8,7 +8,7 @@ const verifyToken = (req: Request, _res: Response, next: NextFunction) => {
   if (!req.headers) {
     const headersMissing = new ApiError(
       "Headers are missing",
-      http_status_codes.BAD_REQUEST
+      httpStatusCodes.BAD_REQUEST
     );
 
     next(headersMissing);
@@ -18,7 +18,7 @@ const verifyToken = (req: Request, _res: Response, next: NextFunction) => {
   if (!req.headers["authorization"]) {
     const authorizationMissing = new ApiError(
       "Authorization header is missing",
-      http_status_codes.BAD_REQUEST
+      httpStatusCodes.BAD_REQUEST
     );
 
     next(authorizationMissing);
@@ -30,7 +30,7 @@ const verifyToken = (req: Request, _res: Response, next: NextFunction) => {
   if (!accessToken) {
     const accessTokenMissing = new ApiError(
       "Access token is missing",
-      http_status_codes.BAD_REQUEST
+      httpStatusCodes.BAD_REQUEST
     );
 
     next(accessTokenMissing);
@@ -42,19 +42,19 @@ const verifyToken = (req: Request, _res: Response, next: NextFunction) => {
     next();
   } catch (error) {
     if (error instanceof TokenExpiredError) {
-      const tokenExpiredError = new ApiError("Access token has expired", http_status_codes.UNAUTHORIZED);
+      const tokenExpiredError = new ApiError("Access token has expired", httpStatusCodes.UNAUTHORIZED);
       next(tokenExpiredError);
       return;
     }
 
     if (error instanceof JsonWebTokenError) {
-      const invalidTokenError = new ApiError("Invalid access token", http_status_codes.UNAUTHORIZED);
+      const invalidTokenError = new ApiError("Invalid access token", httpStatusCodes.UNAUTHORIZED);
       next(invalidTokenError);
       return;
     }
 
     // Generic fallback
-    next(new ApiError("Unexpected Error", http_status_codes.INTERNAL_SERVER_ERROR));
+    next(new ApiError("Unexpected Error", httpStatusCodes.INTERNAL_SERVER_ERROR));
     return;
   }
 };

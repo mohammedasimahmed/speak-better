@@ -1,4 +1,4 @@
-const http_status_codes = {
+const httpStatusCodes = {
   // Success Codes
   "OK": 200,
   "CREATED": 201,
@@ -33,4 +33,4 @@ const http_status_codes = {
 };
 
 
-export default http_status_codes;
+export default httpStatusCodes;

@@ -1,4 +1,4 @@
-import CredentialCache from "./credential_cache";
+import CredentialCache from "./credential-cache";
 
 const usernameCache = new CredentialCache();
 const emailCache = new CredentialCache();

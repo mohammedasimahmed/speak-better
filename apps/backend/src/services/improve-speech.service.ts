@@ -1,7 +1,7 @@
 import llm from "../lib/llm";
 import instruction from "../lib/instruction";
-import { ApiError } from "../lib/api_error";
-import http_status_codes from "../config/http_status_codes";
+import { ApiError } from "../lib/api-error";
+import httpStatusCodes from "../config/http-status-codes";
 
 const improveSpeechService = async (speech: string[], emotion: string[]) => {
   try {
@@ -15,7 +15,7 @@ const improveSpeechService = async (speech: string[], emotion: string[]) => {
 
     return aiMsg.content;
   } catch {
-    throw new ApiError("Unexpected Error", http_status_codes.INTERNAL_SERVER_ERROR);
+    throw new ApiError("Unexpected Error", httpStatusCodes.INTERNAL_SERVER_ERROR);
   }
 };
 

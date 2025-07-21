@@ -1,6 +1,6 @@
 import config from "../config/config";
-import { emailFilter, usernameFilter } from "./bloom_filters";
-import generateHashes from "./generate_hashes";
+import { emailFilter, usernameFilter } from "./bloom-filters";
+import generateHashes from "./generate-hashes";
 
 const checkUsernameFilter = (username: string): boolean => {
   const usernameFilterHashFunctionCount = config.USERNAME_FILTER_HASH_FUNCTION_COUNT;

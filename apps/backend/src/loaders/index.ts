@@ -1,4 +1,4 @@
-import errorHandlerLoader from "./error_handler.loader";
+import errorHandlerLoader from "./error-handler.loader";
 import expressLoader from "./express.loader";
 import { Express } from "express";
 import routesLoader from "./routes.loader";

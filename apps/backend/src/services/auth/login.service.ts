@@ -1,20 +1,20 @@
-import { ApiError } from "../../lib/api_error";
-import http_status_codes from "../../config/http_status_codes";
+import { ApiError } from "../../lib/api-error";
+import httpStatusCodes from "../../config/http-status-codes";
 import { User } from "../../types";
-import { passwordVerify } from "../../lib/password_verify";
-import { isUsernameTaken } from "../../lib/user_checks";
-import { generateAccessToken, generateRefreshToken } from "../../lib/generate_tokens";
+import { passwordVerify } from "../../lib/password-verify";
+import { isUsernameTaken } from "../../lib/user-checks";
+import { generateAccessToken, generateRefreshToken } from "../../lib/generate-tokens";
 
 const validateUserCredentials = async (username: string, password: string) => {
   const user = await isUsernameTaken(username);
 
   if (!user) {
-    throw new ApiError("Username does not exist", http_status_codes.UNAUTHORIZED);
+    throw new ApiError("Username does not exist", httpStatusCodes.UNAUTHORIZED);
   }
 
   const isPasswordValid = await passwordVerify(password, user.password);
   if (!isPasswordValid) {
-    throw new ApiError("Wrong Password", http_status_codes.UNAUTHORIZED);
+    throw new ApiError("Wrong Password", httpStatusCodes.UNAUTHORIZED);
   }
 
   return user;

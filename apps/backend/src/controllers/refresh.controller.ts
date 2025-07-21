@@ -1,13 +1,13 @@
 import { Request, Response, NextFunction } from "express";
-import http_status_codes from "../config/http_status_codes";
+import httpStatusCodes from "../config/http-status-codes";
 import handleRefreshToken from "../services/auth/refresh.service";
-import { ApiError } from "../lib/api_error";
+import { ApiError } from "../lib/api-error";
 
 const refreshController = (req: Request, res: Response, next: NextFunction) => {
   if (!req.cookies) {
     const cookieMissing = new ApiError(
       "Cookie is missing",
-      http_status_codes.BAD_REQUEST
+      httpStatusCodes.BAD_REQUEST
     );
 
     next(cookieMissing);
@@ -19,7 +19,7 @@ const refreshController = (req: Request, res: Response, next: NextFunction) => {
   if (!cookies.refresh) {
     const refreshTokenMissing = new ApiError(
       "Refresh token is missing",
-      http_status_codes.BAD_REQUEST
+      httpStatusCodes.BAD_REQUEST
     );
 
     next(refreshTokenMissing);
@@ -30,7 +30,7 @@ const refreshController = (req: Request, res: Response, next: NextFunction) => {
 
   try {
     const { accessToken, username, email } = handleRefreshToken(refreshToken);
-    res.status(http_status_codes.OK).json({ accessToken, username, email });
+    res.status(httpStatusCodes.OK).json({ accessToken, username, email });
   } catch (error) {
     next(error);
   }

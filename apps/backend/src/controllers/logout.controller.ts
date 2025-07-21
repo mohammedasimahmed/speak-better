@@ -1,24 +1,24 @@
 import { NextFunction, Request, Response } from "express";
-import { ApiError } from "../lib/api_error";
-import http_status_codes from "../config/http_status_codes";
+import { ApiError } from "../lib/api-error";
+import httpStatusCodes from "../config/http-status-codes";
 import config from "../config/config";
 
 const logoutController = (req: Request, res: Response, next: NextFunction) => {
   if (!req.cookies) {
     const cookiesMissing = new ApiError(
       "No cookies Found",
-      http_status_codes.BAD_REQUEST
+      httpStatusCodes.BAD_REQUEST
     );
 
     next(cookiesMissing);
     return;
   }
 
-  const {cookies} = req;
+  const { cookies } = req;
   if (!cookies.refresh) {
     const refreshTokenMissing = new ApiError(
       "Refresh Token is missing in the cookies",
-      http_status_codes.BAD_REQUEST
+      httpStatusCodes.BAD_REQUEST
     );
 
     next(refreshTokenMissing);
@@ -32,7 +32,7 @@ const logoutController = (req: Request, res: Response, next: NextFunction) => {
     maxAge: 0,
   });
 
-  res.status(http_status_codes.OK).json({ message: "Logged out successfully" });
+  res.status(httpStatusCodes.OK).json({ message: "Logged out successfully" });
 };
 
 export default logoutController;
