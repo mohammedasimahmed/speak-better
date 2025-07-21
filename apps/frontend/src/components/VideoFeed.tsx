@@ -119,7 +119,18 @@ const VideoFeed = () => {
       const { improvements } = await improveSpeech(wordEmotionPairs);
 
       if (improvements) {
-        const result = JSON.parse(improvements.replace(/^```|```$/g, ""));
+        let cleanedImprovementsData = improvements.trim();
+
+        // Strip ```json or ``` at start
+        if (cleanedImprovementsData.startsWith("```")) {
+          cleanedImprovementsData = cleanedImprovementsData.replace(/^```(?:json)?\s*/i, ""); // remove ``` or ```json
+          cleanedImprovementsData = cleanedImprovementsData.replace(/```$/, "");              // remove trailing ```
+        }
+
+        // Clean any raw line breaks/tabs inside strings
+        cleanedImprovementsData = cleanedImprovementsData.replace(/\\?[\n\r\t]+/g, " ");
+
+        const result = JSON.parse(cleanedImprovementsData);
         setSuggestion(result);
       }
     } catch (error) {
