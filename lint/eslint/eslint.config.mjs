@@ -60,4 +60,15 @@ export default defineConfig([
     },
     rules: commonRules,
   },
+
+  // Auth Service config
+  {
+    files: ["apps/auth-service/**/*.{js,ts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: {
+      globals: globals.node,
+    },
+    rules: commonRules,
+  },
 ]);

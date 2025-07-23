@@ -5,8 +5,8 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "start": "turbo run start",
-    "lint": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend apps/user-checks-service",
-    "lint:fix": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend apps/user-checks-service --fix",
+    "lint": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend apps/user-checks-service apps/auth-service",
+    "lint:fix": "eslint --config lint/eslint/eslint.config.mjs apps/frontend apps/backend apps/user-checks-service apps/auth-service --fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "prepare": "husky install"
   },
