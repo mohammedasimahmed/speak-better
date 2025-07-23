@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/server.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r src/proto dist/proto",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts"
   },
@@ -26,6 +26,8 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.13.4",
+    "@grpc/proto-loader": "^0.8.0",
     "@langchain/core": "^0.3.44",
     "@langchain/google-genai": "^0.2.3",
     "@prisma/client": "^6.6.0",

@@ -3,12 +3,11 @@ import GrpcError from "../lib/grpc-error";
 import { getUserBasedOnUsername } from "../services/user-checks.service";
 
 type GetUserBasedOnUsernameRequest = { username: string };
-type GetUserBasedOnUsernameResponse = { username: string; email: string; password: string };
+type GetUserBasedOnUsernameResponse = { id:number, username: string; email: string; password: string };
 
 const getUserBasedOnUsernameHandler = async (call: ServerUnaryCall<GetUserBasedOnUsernameRequest, GetUserBasedOnUsernameResponse>, callback: sendUnaryData<GetUserBasedOnUsernameResponse>) => {
   try {
     const { username } = call.request;
-    console.log("request", call.request);
     const user = await getUserBasedOnUsername(username);
 
     console.log("user is", user);

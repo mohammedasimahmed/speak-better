@@ -39,11 +39,9 @@ const registerUserService = async (username: string, email: string, password: st
 
   await addToFilterAndCache(username, email);
 
-  const newUser = await prisma.user.create({
+  await prisma.user.create({
     data: { username, email, password: hashedPassword },
   });
-
-  return newUser;
 };
 
 export default registerUserService;

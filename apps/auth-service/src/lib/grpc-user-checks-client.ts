@@ -15,7 +15,7 @@ const grpcObject = grpc.loadPackageDefinition(packageDef) as unknown as {
 const userChecksPackage = grpcObject.UserChecksPackage;
 
 const grpcUserChecksClient = new userChecksPackage.UserChecksService(
-  `0.0.0.0:${config.USER_CHECKS_SERVICE_PORT}`,
+  `${config.USER_CHECKS_SERVICE_URL}:${config.USER_CHECKS_SERVICE_PORT}`,
   grpc.credentials.createInsecure()
 );
 

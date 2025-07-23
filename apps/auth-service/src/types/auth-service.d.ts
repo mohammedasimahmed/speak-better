@@ -1,12 +1,21 @@
 import * as grpc from "@grpc/grpc-js";
 
-// Generated from AuthService.proto
-
-export interface EmptyResponse {}
+export interface EmptyResponse { }
 
 export interface LoginRequest {
   username: string;
   password: string;
+}
+
+export interface LoginUserResponseObject {
+  username: string;
+  email: string;
+}
+
+export interface LoginResponse {
+  accessToken: string;
+  refreshToken: string;
+  user: LoginUserResponseObject;
 }
 
 export interface RegisterRequest {
@@ -19,7 +28,7 @@ export interface RefreshRequest {
   refreshToken: string;
 }
 
-export interface AuthResponse {
+export interface RefreshResponse {
   accessToken: string;
   username: string;
   email: string;
@@ -30,8 +39,8 @@ export interface ValidateTokenRequest {
 }
 
 export interface AuthServiceInterface extends grpc.UntypedServiceImplementation {
-    login: grpc.handleUnaryCall<LoginRequest, AuthResponse>;
-    register: grpc.handleUnaryCall<RegisterRequest, EmptyResponse>;
-    refresh: grpc.handleUnaryCall<RefreshRequest, AuthResponse>;
-    validateToken: grpc.handleUnaryCall<ValidateTokenRequest, EmptyResponse>;
+  login: grpc.handleUnaryCall<LoginRequest, LoginResponse>;
+  register: grpc.handleUnaryCall<RegisterRequest, EmptyResponse>;
+  refresh: grpc.handleUnaryCall<RefreshRequest, RefreshResponse>;
+  validateToken: grpc.handleUnaryCall<ValidateTokenRequest, EmptyResponse>;
 }

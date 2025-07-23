@@ -5,9 +5,9 @@ import grpcUserChecksClient from "../lib/grpc-user-checks-client";
 import GrpcError from "../lib/grpc-error";
 import { status } from "@grpc/grpc-js";
 
-const getUser = (username: string): Promise<User | null> => {
+const getUser = (username: string): Promise<User> => {
   return new Promise((resolve, reject) => {
-    grpcUserChecksClient.getUserBasedOnUsername({ username }, (error: GrpcError, response: User | null) => {
+    grpcUserChecksClient.getUserBasedOnUsername({ username }, (error: GrpcError, response: User) => {
       if (error || !response) {
         return reject(error);
       }

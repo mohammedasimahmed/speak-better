@@ -4,7 +4,6 @@ import generateHashes from "../lib/generate-hashes";
 
 const checkUsernameFilter = (username: string): boolean => {
   const usernameFilterHashFunctionCount = config.USERNAME_FILTER_HASH_FUNCTION_COUNT;
-  console.log("username", username);
   const usernameHashes = generateHashes(username, usernameFilterHashFunctionCount);
 
   for (const hash of usernameHashes) {

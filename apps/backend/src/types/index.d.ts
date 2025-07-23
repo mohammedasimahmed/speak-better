@@ -10,8 +10,8 @@ export interface RegisterRequestBody {
 }
 
 export interface ImproveSpeechRequestBody {
-    speech :[string],
-    emotion: [string]
+    speech :string[],
+    emotion: string[]
 }
 
 export interface User {

@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "src/server.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && cp -r src/proto dist/proto",
     "start": "node dist/server.js",
     "dev": "nodemon src/server.ts"
   },

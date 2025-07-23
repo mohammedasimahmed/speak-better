@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package SpeechImprovePackage;
+
+// Service definition
+service SpeechImproveService {
+  rpc improveSpeech(ImproveSpeechRequest) returns (ImproveSpeechResponse);
+}
+
+message ImproveSpeechRequest {
+  repeated string speech = 1;
+  repeated string emotion = 2;
+}
+
+message ImproveSpeechResponse {
+  string improvements = 1;
+}

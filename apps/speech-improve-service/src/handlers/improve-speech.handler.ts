@@ -1,6 +1,5 @@
 import { ServerUnaryCall, sendUnaryData, status } from "@grpc/grpc-js";
 import improveSpeechService from "../services/improve-speech.service";
-import GrpcError from "../lib/grpc-error";
 
 const improveSpeechHandler = async (
   call: ServerUnaryCall<{ speech: string[], emotion: string[] }, { improvements: string }>,
@@ -13,8 +12,8 @@ const improveSpeechHandler = async (
 
     callback(null, { improvements });
   } catch (error) {
-    const grpcFormattedError = error instanceof GrpcError
-      ? { code: error.code, message: error.message }
+    const grpcFormattedError =  error !== null && typeof error === "object" && "code" in error && "message" in error
+      ? { code: error.code as status, message: error.message as string }
       : { code: status.INTERNAL, message: "Internal server error" };
 
     console.error("Error in improve speech handler:", error);

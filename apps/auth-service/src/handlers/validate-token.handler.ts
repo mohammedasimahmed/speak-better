@@ -16,6 +16,7 @@ const validateTokenHandler = (call: ServerUnaryCall<{ accessToken: string }, {}>
     validateToken(accessToken);
     callback(null, {});
   } catch (error) {
+    console.log(error);
     if (error instanceof GrpcError) {
       callback({
         code: error.code,

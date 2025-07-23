@@ -1,10 +1,25 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { NextFunction, Request, Response } from "express";
 import { ApiError } from "../lib/api-error";
 import httpStatusCodes from "../config/http-status-codes";
-import jwt, { JwtPayload, JsonWebTokenError, TokenExpiredError } from "jsonwebtoken";
-import config from "../config/config";
+import grpcAuthServiceClient from "../lib/grpc-auth-service-client";
+import grpcToHttpStatus from "../lib/grpc-to-http-status";
+import getMessageFromError from "../lib/get-message-from-error";
 
-const verifyToken = (req: Request, _res: Response, next: NextFunction) => {
+interface validateTokenResponse {}
+
+const validateToken = (accessToken: string): Promise<validateTokenResponse> => {
+  return new Promise((resolve, reject) => {
+    grpcAuthServiceClient.validateToken({ accessToken }, (error: unknown, response: validateTokenResponse | null) => {
+      if (error || !response) {
+        return reject(error);
+      }
+      return resolve(response);
+    });
+  });
+};
+
+const verifyToken = async (req: Request, _res: Response, next: NextFunction) => {
   if (!req.headers) {
     const headersMissing = new ApiError(
       "Headers are missing",
@@ -38,24 +53,14 @@ const verifyToken = (req: Request, _res: Response, next: NextFunction) => {
   }
 
   try {
-    jwt.verify(accessToken, config.JWT_ACCESS_TOKEN_SECRET) as JwtPayload;
+    await validateToken(accessToken);
     next();
   } catch (error) {
-    if (error instanceof TokenExpiredError) {
-      const tokenExpiredError = new ApiError("Access token has expired", httpStatusCodes.UNAUTHORIZED);
-      next(tokenExpiredError);
-      return;
-    }
+    const validateTokenError = error !== null && typeof error === "object" && "code" in error && "message" in error
+      ? new ApiError(getMessageFromError(error), grpcToHttpStatus[error.code as number] || 500)
+      : new ApiError("Internal server error", 500);
 
-    if (error instanceof JsonWebTokenError) {
-      const invalidTokenError = new ApiError("Invalid access token", httpStatusCodes.UNAUTHORIZED);
-      next(invalidTokenError);
-      return;
-    }
-
-    // Generic fallback
-    next(new ApiError("Unexpected Error", httpStatusCodes.INTERNAL_SERVER_ERROR));
-    return;
+    next(validateTokenError);
   }
 };
 

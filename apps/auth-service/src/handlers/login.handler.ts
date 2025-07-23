@@ -1,6 +1,5 @@
 import { ServerUnaryCall, sendUnaryData, status } from "@grpc/grpc-js";
 import loginUserService from "../services/login.service";
-import GrpcError from "../lib/grpc-error";
 
 const loginHandler = async (
   call: ServerUnaryCall<{ username: string, password: string }, { accessToken: string, refreshToken: string, user: { username: string, email: string } }>,
@@ -16,9 +15,9 @@ const loginHandler = async (
       refreshToken,
       user,
     });
-  } catch (error: unknown) {
-    const grpcFormattedError = error instanceof GrpcError
-      ? { code: error.code, message: error.message }
+  } catch (error) {
+    const grpcFormattedError = error !== null && typeof error === "object" && "code" in error && "message" in error
+      ? { code: error.code as status, message: error.message as string }
       : { code: status.INTERNAL, message: "Internal server error" };
 
     console.error("Login error:", error);

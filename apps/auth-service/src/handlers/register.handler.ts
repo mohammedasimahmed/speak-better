@@ -1,20 +1,16 @@
+/* eslint-disable @typescript-eslint/no-empty-object-type */
 import { ServerUnaryCall, sendUnaryData, status } from "@grpc/grpc-js";
-import GrpcError from "../lib/grpc-error";
 import registerUserService from "../services/register.service";
-import { User } from "../types";
 
-const registerHandler = async (call: ServerUnaryCall<{ username: string, email: string, password: string }, { message: string, user: User }>, callback: sendUnaryData<{ message: string, user: User }>) => {
+const registerHandler = async (call: ServerUnaryCall<{ username: string, email: string, password: string }, {}>, callback: sendUnaryData<{}>) => {
   const { username, email, password } = call.request;
   try {
-    const newUser = await registerUserService(username, email, password);
+    await registerUserService(username, email, password);
 
-    callback(null, {
-      message: "User registered successfully",
-      user: newUser
-    });
+    callback(null, {});
   } catch (error) {
-    const grpcFormattedError = error instanceof GrpcError
-      ? { code: error.code, message: error.message }
+    const grpcFormattedError =  error !== null && typeof error === "object" && "code" in error && "message" in error
+      ? { code: error.code as status, message: error.message as string }
       : { code: status.INTERNAL, message: "Internal server error" };
 
     console.error("Error in registration:", error);
