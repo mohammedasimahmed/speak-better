@@ -49,4 +49,15 @@ export default defineConfig([
     },
     rules: commonRules,
   },
+
+  // User Checks Service config
+  {
+    files: ["apps/user-checks-service/**/*.{js,ts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: {
+      globals: globals.node,
+    },
+    rules: commonRules,
+  },
 ]);

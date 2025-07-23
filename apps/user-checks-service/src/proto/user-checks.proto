@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package UserChecksPackage;
+
+// Service definition
+service UserChecksService {
+  rpc addToFilterAndCache(UsernameAndEmailRequest) returns (EmptyResponse);
+  rpc checkUsernameAndEmailExists(UsernameAndEmailRequest) returns (EmptyResponse);
+  rpc getUserBasedOnUsername(UsernameRequest) returns (UserData);
+}
+
+message EmptyResponse {}
+
+message UsernameRequest {
+  string username = 1;
+}
+
+message UsernameAndEmailRequest {
+  string username = 1;
+  string email = 2;
+}
+
+message UserData {
+  int32 id = 1;
+  string username = 2;
+  string email = 3;
+  string password = 4;
+}
