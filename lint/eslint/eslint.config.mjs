@@ -71,4 +71,15 @@ export default defineConfig([
     },
     rules: commonRules,
   },
+
+  // Speech Improve Service config
+  {
+    files: ["apps/speech-improve-service/**/*.{js,ts}"],
+    plugins: { js },
+    extends: ["js/recommended"],
+    languageOptions: {
+      globals: globals.node,
+    },
+    rules: commonRules,
+  },
 ]);
