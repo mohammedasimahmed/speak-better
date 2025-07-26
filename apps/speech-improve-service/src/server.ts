@@ -1,7 +1,6 @@
 import * as grpc from "@grpc/grpc-js";
 import * as protoLoader from "@grpc/proto-loader";
 import * as path from "path";
-import config from "./config/config";
 import improveSpeechHandler from "./handlers/improve-speech.handler";
 import { SpeechImproveServiceInterface } from "./types/speech-improve";
 
@@ -24,7 +23,7 @@ const startServer = () => {
     "improveSpeech": improveSpeechHandler,
   });
 
-  server.bindAsync(`0.0.0.0:${config.PORT}`, grpc.ServerCredentials.createInsecure(), (err, port) => {
+  server.bindAsync(`0.0.0.0:5001`, grpc.ServerCredentials.createInsecure(), (err, port) => {
     if (err) {
       console.error(`Error starting server: ${err.message}`);
       return;

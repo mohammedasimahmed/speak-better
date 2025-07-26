@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const config = {
-  PORT: process.env.PORT || 5003,
   DATABASE_URL: process.env.DATABASE_URL || "postgresql://postgres:postgres@localhost:5432/postgres",
   ENVIRONMENT: process.env.ENVIRONMENT || "development",
   USERNAME_FILTER_SIZE: process.env.USERNAME_FILTER_SIZE ? parseInt(process.env.USERNAME_FILTER_SIZE) : 1437759,

@@ -1,7 +1,6 @@
 import * as grpc from "@grpc/grpc-js";
 import * as protoLoader from "@grpc/proto-loader";
 import * as path from "path";
-import config from "./config/config";
 import loginHandler from "./handlers/login.handler";
 import registerHandler from "./handlers/register.handler";
 import refreshHandler from "./handlers/refresh.handler";
@@ -30,7 +29,7 @@ const startServer = () => {
     "validateToken": validateTokenHandler
   });
 
-  server.bindAsync(`0.0.0.0:${config.PORT}`, grpc.ServerCredentials.createInsecure(), (err, port) => {
+  server.bindAsync(`0.0.0.0:5002`, grpc.ServerCredentials.createInsecure(), (err, port) => {
     if (err) {
       console.error(`Error starting server: ${err.message}`);
       return;
